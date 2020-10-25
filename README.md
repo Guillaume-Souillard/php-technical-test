@@ -25,3 +25,8 @@ pass: stadline
 
 
 ## Temps réalisé sur le test && Conclusion
+Temps réalisé: Environ 4heures.
+
+Petite note vis à vis des tests, comme précisé à l'entretien, je suis complétement novice dans ce domaine
+(aucun besoin dans mes anciennes boites ou projet perso). Mais j'ai quand même fait un petit test (avec la doc sous les
+les yeux :P) qui permet de tester le fomulaire de création de course :P
