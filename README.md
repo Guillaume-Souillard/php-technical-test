@@ -17,4 +17,11 @@ Ensuite, tu peux accéder à l'application en allant ici : http://localhost/
 
 ## Info de connexion au dashboard
 
-## Temps réalisé sur le test
+Pour se connecter au dashboard, rien de plus simple, voici les infos:
+
+mail: stadline@stadline.com
+
+pass: stadline
+
+
+## Temps réalisé sur le test && Conclusion
