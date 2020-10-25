@@ -49,6 +49,25 @@ class RunContoller extends AbstractController
     }
 
     /**
+     * @Route("/dashboard/run/{id}/delete", name="delete_run")
+     */
+    public function delete(Request $request, $id): Response
+    {
+        /**
+         * @var $run Run
+         */
+        if ($run = $this->getDoctrine()->getRepository(Run::class)->find($id)) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($run);
+            $em->flush();
+
+            return $this->redirectToRoute('dashboard');
+        }
+
+        return new Response('Run not found', 404);
+    }
+
+    /**
      * @param Request $request
      * @param Run $run
      * @param false $edit
