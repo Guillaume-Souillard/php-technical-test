@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -33,6 +35,16 @@ class User implements UserInterface
      * @ORM\Column(type="string")
      */
     private $password;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Run::class, mappedBy="uid", orphanRemoval=true)
+     */
+    private $runs;
+
+    public function __construct()
+    {
+        $this->runs = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -110,5 +122,35 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * @return Collection|Run[]
+     */
+    public function getRuns(): Collection
+    {
+        return $this->runs;
+    }
+
+    public function addRun(Run $run): self
+    {
+        if (!$this->runs->contains($run)) {
+            $this->runs[] = $run;
+            $run->setUid($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRun(Run $run): self
+    {
+        if ($this->runs->removeElement($run)) {
+            // set the owning side to null (unless already changed)
+            if ($run->getUid() === $this) {
+                $run->setUid(null);
+            }
+        }
+
+        return $this;
     }
 }
