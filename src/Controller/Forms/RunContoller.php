@@ -42,7 +42,11 @@ class RunContoller extends AbstractController
     public function edit(Request $request, $id): Response
     {
         if ($run = $this->getDoctrine()->getRepository(Run::class)->find($id)) {
-            return $this->execute($request, $run, true);
+            if ($run->getUid() === $this->security->getUser()) {
+                return $this->execute($request, $run, true);
+            }
+
+            return new Response('unauthorised', 401);
         }
 
         return new Response('Run not found', 404);
@@ -57,11 +61,15 @@ class RunContoller extends AbstractController
          * @var $run Run
          */
         if ($run = $this->getDoctrine()->getRepository(Run::class)->find($id)) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($run);
-            $em->flush();
+            if ($run->getUid() === $this->security->getUser()) {
 
-            return $this->redirectToRoute('dashboard');
+                $em = $this->getDoctrine()->getManager();
+                $em->remove($run);
+                $em->flush();
+
+                return $this->redirectToRoute('dashboard');
+            }
+            return new Response('unauthorised', 401);
         }
 
         return new Response('Run not found', 404);
