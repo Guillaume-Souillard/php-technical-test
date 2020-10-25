@@ -144,4 +144,19 @@ class Run
             'comment' => $this->getComment(),
         ];
     }
+
+    /**
+     * @return array
+     */
+    public function getApiFormatedData(): array {
+        $data = $this->getFormatedData();
+        $data['type'] = [
+            'id' => $this->getType()->getId(),
+            'name' => $this->getType()->getName(),
+        ];
+
+        $data['uid'] = $this->getUid()->getId();
+
+        return $data;
+    }
 }
