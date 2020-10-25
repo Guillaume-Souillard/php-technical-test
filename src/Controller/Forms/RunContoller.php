@@ -3,7 +3,7 @@
 namespace App\Controller\Forms;
 
 use App\Entity\Run;
-use App\Entity\RunType;
+use App\Traits\Converter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,6 +12,7 @@ use Symfony\Component\Security\Core\Security;
 
 class RunContoller extends AbstractController
 {
+    use Converter;
     /**
      * @var Security
      */
@@ -85,6 +86,9 @@ class RunContoller extends AbstractController
         $form = $this->createForm(\App\Form\RunType::class, $run);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $run->setAverageSpeed($this->meterPerSecondIntoKilometerPerHour($run->getDistance() / $run->getDuration()));
+            $run->setAveragePace($this->secondPerMeterIntoMinutePerKilometer($run->getDuration() / $run->getDistance()));
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($run);
             $em->flush();

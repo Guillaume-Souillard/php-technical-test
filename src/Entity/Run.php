@@ -57,6 +57,16 @@ class Run
      */
     private $comment;
 
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $average_speed;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $average_pace;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -145,7 +155,9 @@ class Run
             'duration' => $this->getDuration(),
             'duration_minute' => $this->secondToMinute($this->getDuration()),
             'distance' => $this->getDistance(),
-            'distance_kilometer' => $this->metterToKilometter($this->getDistance()),
+            'distance_kilometer' => $this->meterToKilometer($this->getDistance()),
+            'average_speed' => $this->getAverageSpeed(),
+            'average_pace' => $this->getAveragePace() / 60,
             'comment' => $this->getComment(),
         ];
     }
@@ -163,5 +175,29 @@ class Run
         $data['uid'] = $this->getUid()->getId();
 
         return $data;
+    }
+
+    public function getAverageSpeed(): ?float
+    {
+        return $this->average_speed;
+    }
+
+    public function setAverageSpeed(float $average_speed): self
+    {
+        $this->average_speed = $average_speed;
+
+        return $this;
+    }
+
+    public function getAveragePace(): ?int
+    {
+        return $this->average_pace;
+    }
+
+    public function setAveragePace(int $average_pace): self
+    {
+        $this->average_pace = $average_pace;
+
+        return $this;
     }
 }
