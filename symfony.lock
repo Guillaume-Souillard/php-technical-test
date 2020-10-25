@@ -105,6 +105,9 @@
     "laminas/laminas-zendframework-bridge": {
         "version": "1.1.1"
     },
+    "nesbot/carbon": {
+        "version": "2.41.5"
+    },
     "nikic/php-parser": {
         "version": "v4.10.2"
     },
@@ -184,6 +187,9 @@
             ".env"
         ]
     },
+    "symfony/form": {
+        "version": "v4.4.15"
+    },
     "symfony/framework-bundle": {
         "version": "4.4",
         "recipe": {
@@ -217,6 +223,9 @@
     "symfony/inflector": {
         "version": "v4.4.15"
     },
+    "symfony/intl": {
+        "version": "v4.4.15"
+    },
     "symfony/maker-bundle": {
         "version": "1.0",
         "recipe": {
@@ -229,8 +238,14 @@
     "symfony/mime": {
         "version": "v4.4.15"
     },
+    "symfony/options-resolver": {
+        "version": "v4.4.15"
+    },
     "symfony/orm-pack": {
         "version": "v2.0.0"
+    },
+    "symfony/polyfill-intl-icu": {
+        "version": "v1.20.0"
     },
     "symfony/polyfill-intl-idn": {
         "version": "v1.19.0"
@@ -297,6 +312,19 @@
     "symfony/stopwatch": {
         "version": "v4.4.15"
     },
+    "symfony/translation": {
+        "version": "3.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.3",
+            "ref": "2ad9d2545bce8ca1a863e50e92141f0b9d87ffcd"
+        },
+        "files": [
+            "config/packages/translation.yaml",
+            "translations/.gitignore"
+        ]
+    },
     "symfony/translation-contracts": {
         "version": "v2.3.0"
     },
@@ -319,6 +347,19 @@
     },
     "symfony/twig-pack": {
         "version": "v1.0.2"
+    },
+    "symfony/validator": {
+        "version": "4.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.3",
+            "ref": "d902da3e4952f18d3bf05aab29512eb61cabd869"
+        },
+        "files": [
+            "config/packages/test/validator.yaml",
+            "config/packages/validator.yaml"
+        ]
     },
     "symfony/var-dumper": {
         "version": "v4.4.15"

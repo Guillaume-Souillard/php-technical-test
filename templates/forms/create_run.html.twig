@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create Run{% endblock %}
+
+{% block body %}
+    <!--
+      Tailwind UI components require Tailwind CSS v1.8 and the @tailwindcss/ui plugin.
+      Read the documentation to get started: https://tailwindui.com/documentation
+    -->
+    <div class="py-16 px-4 overflow-hidden sm:px-6 lg:px-8 lg:py-24">
+        <div class="relative max-w-xl mx-auto">
+            <div class="text-center">
+                <h2 class="text-3xl leading-9 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10">
+                    Create run
+                </h2>
+            </div>
+            <div class="mt-12">
+                {{ form_start(form) }}
+
+                {{ form_errors(form) }}
+
+                <div class="sm:col-span-2">
+                        <label class="block text-sm font-medium leading-5 text-gray-700">Start datetime</label>
+                        {{ form_row(form.datetime) }}
+                    </div>
+                    <div class="sm:col-span-2">
+                        <label class="block text-sm font-medium leading-5 text-gray-700">Distance (Metter)</label>
+                        {{ form_row(form.distance) }}
+                    </div>
+                    <div class="sm:col-span-2">
+                        <label for="company" class="block text-sm font-medium leading-5 text-gray-700">Duration (Seconde)</label>
+                        {{ form_row(form.duration) }}
+                    </div>
+                    <div class="sm:col-span-2">
+                        <label for="phone_number" class="block text-sm font-medium leading-5 text-gray-700">Running type</label>
+                        <div class="mt-1 relative rounded-md shadow-sm">
+                            {{ form_row(form.type) }}
+                        </div>
+                    </div>
+                    <div class="sm:col-span-2">
+                        <label for="message" class="block text-sm font-medium leading-5 text-gray-700">Comment</label>
+                        <div class="mt-1 relative rounded-md shadow-sm">
+                            {{ form_row(form.comment) }}
+                        </div>
+                    </div>
+
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                    <div class="sm:col-span-2">
+                      <span class="w-full inline-flex rounded-md shadow-sm">
+                        <button type="submit" class="w-full inline-flex items-center justify-center px-6 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150">
+                          Submit
+                        </button>
+                      </span>
+                    </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\RunRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=RunRepository::class)
@@ -26,21 +27,25 @@ class Run
     /**
      * @ORM\ManyToOne(targetEntity=RunType::class)
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotNull()
      */
     private $type;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\NotNull
      */
     private $datetime;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotNull
      */
     private $duration;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotNull
      */
     private $distance;
 
@@ -124,5 +129,19 @@ class Run
         $this->comment = $comment;
 
         return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getFormatedData(): array {
+        return [
+            'id' => $this->getId(),
+            'type' => $this->getType()->getName(),
+            'datetime' => $this->getDatetime()->format(DATE_RFC3339),
+            'duration' => $this->getDuration(),
+            'distance' => $this->getDistance(),
+            'comment' => $this->getComment(),
+        ];
     }
 }
