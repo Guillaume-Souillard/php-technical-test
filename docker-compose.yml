@@ -43,7 +43,6 @@ services:
     image: mariadb
     container_name: stadline-mariadb
     environment:
-      MYSQL_DATABASE: stadline
       MYSQL_ROOT_PASSWORD: root
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
