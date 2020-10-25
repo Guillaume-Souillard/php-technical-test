@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
 
-class CreateRunContoller extends AbstractController
+class RunContoller extends AbstractController
 {
     /**
      * @var Security
@@ -26,12 +26,35 @@ class CreateRunContoller extends AbstractController
     }
 
     /**
-     * @Route("/dashboard/run/create", name="forms_create_run")
+     * @Route("/dashboard/run/create", name="create_run")
      */
-    public function index(Request $request): Response
+    public function create(Request $request): Response
     {
         $run = new Run();
         $run->setUid($this->security->getUser());
+
+        return $this->execute($request, $run);
+    }
+
+    /**
+     * @Route("/dashboard/run/{id}/edit", name="edit_run")
+     */
+    public function edit(Request $request, $id): Response
+    {
+        if ($run = $this->getDoctrine()->getRepository(Run::class)->find($id)) {
+            return $this->execute($request, $run, true);
+        }
+
+        return new Response('Run not found', 404);
+    }
+
+    /**
+     * @param Request $request
+     * @param Run $run
+     * @param false $edit
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     */
+    private function execute(Request $request, Run $run, $edit = false) {
         $form = $this->createForm(\App\Form\RunType::class, $run);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -42,8 +65,9 @@ class CreateRunContoller extends AbstractController
             return $this->redirectToRoute('dashboard');
         }
 
-        return $this->render('forms/create_run.html.twig', [
+        return $this->render('forms/run.html.twig', [
             'form' => $form->createView(),
+            'edit' => $edit,
         ]);
     }
 }
