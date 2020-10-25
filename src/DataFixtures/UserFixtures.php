@@ -30,9 +30,8 @@ class UserFixtures extends Fixture
         $user = new User();
         $user->setEmail('stadline@stadline.com');
         $user->setPassword($this->encoder->encodePassword($user, 'stadline'));
+        $user->setRoles(['ROLE_USER']);
         $manager->persist($user);
-        $manager->flush();
-
         $manager->flush();
     }
 }
