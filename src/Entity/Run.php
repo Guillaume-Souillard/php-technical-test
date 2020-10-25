@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\RunRepository;
+use App\Traits\Converter;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -11,6 +12,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Run
 {
+    use Converter;
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -140,7 +143,9 @@ class Run
             'type' => $this->getType()->getName(),
             'datetime' => $this->getDatetime()->format(DATE_RFC3339),
             'duration' => $this->getDuration(),
+            'duration_minute' => $this->secondToMinute($this->getDuration()),
             'distance' => $this->getDistance(),
+            'distance_kilometer' => $this->metterToKilometter($this->getDistance()),
             'comment' => $this->getComment(),
         ];
     }
