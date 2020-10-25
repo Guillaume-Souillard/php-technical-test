@@ -15,4 +15,4 @@ echo "Utilisation des fixtures pour data de démo"
 php bin/console doctrine:fixtures:load -n
 echo "fixtures OK"
 
-echo "Tu peux maintenant te rendre https://localhost et te connecter avec mail: stadline@stadline.com et pass: stadline"
+echo "Tu peux maintenant te rendre http://localhost et te connecter avec mail: stadline@stadline.com et pass: stadline"
